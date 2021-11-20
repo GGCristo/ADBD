@@ -16,3 +16,13 @@ CREATE TRIGGER trigger_crear_email_before_insert
   ON cliente_club
   FOR EACH ROW
   EXECUTE PROCEDURE crear_email('gmail.es');
+
+CREATE OR REPLACE FUNCTION comprobar_zonaDeTrabajo() RETURNS trigger AS $$
+$$
+LANGUAGE 'plpgsql';
+
+CREATE TRIGGER trigger_comprobar_empleado_en_zona
+  BEFORE INSERT
+  ON empleados
+  FOR EACH ROW
+  EXECUTE PROCEDURE comprobar_zonaDeTrabajo();
